@@ -17,6 +17,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/stories', function () {
+    return view('stories.index');
+})->name('stories.index');
+
+Route::get('/stories/create', function () {
+    return view('stories.create');
+})->name('stories.create');
+
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
