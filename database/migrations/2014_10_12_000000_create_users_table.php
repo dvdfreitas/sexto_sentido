@@ -14,14 +14,22 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('username')->unique();
+            $table->enum('sex', ['male', 'female' ])->nullable();
+            $table->enum('runner_type', ['atleta', 'guia']);
             $table->string('email')->unique();
-            $table->boolean('public_profile')->default(false);
-            // Guide / Athlete
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
+            $table->string('profile_photo_path', 2048)->default("https://i.imgur.com/zHnSsR0.png")->nullable();
+            $table->string('profile_banner_path', 2048)->default("https://i.imgur.com/72oTVEt.jpg")->nullable();
+            $table->enum('district', [
+                'aveiro', 'beja', 'braga', 'bragança', 'castelo_branco', 'coimbra',
+                'evora', 'faro', 'guarda', 'leiria', 'lisboa', 'portalegre', 'porto',
+                'santarem', 'setubal', 'viana_do_castelo', 'vila_real', 'viseu'
+            ])->nullable();
+            $table->boolean('is_profile_public')->default(false);
+            $table->timestamp('email_verified_at')->nullable();
             $table->foreignId('current_team_id')->nullable();
-            $table->string('profile_photo_path', 2048)->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }
