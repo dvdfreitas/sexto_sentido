@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stories', function (Blueprint $table) {            
+        Schema::create('stories', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('subtitle')->nullable();
+            $table->string('slug')->unique();
             $table->string('image')->nullable();
-            $table->string('type')->nullable();
-            $table->text('summary');
-            $table->date('date');
-            $table->string('url');
-            $table->timestamps();            
+            $table->text('description')->nullable();
+            $table->string('url')->nullable();
+            $table->timestamps();
         });
     }
 
