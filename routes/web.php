@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [Controller::class, 'loadHomePage']);
+Route::get('/home', [Controller::class, 'loadHomePage'])->name('home');
+Route::get('/welcome', [Controller::class, 'loadHomePage'])->name('welcome');
 
 Route::get('/stories', function () {
     return view('stories.index');
@@ -24,7 +25,6 @@ Route::get('/stories', function () {
 Route::get('/stories/create', function () {
     return view('stories.create');
 })->name('stories.create');
-
 
 
 Route::middleware([
