@@ -19,10 +19,6 @@ return new class extends Migration
             $table->text('description')->nullable();            
             $table->timestamps();
         });
-
-        Schema::create('races', function (Blueprint $table) {
-            
-        });
     }
 
     /**
