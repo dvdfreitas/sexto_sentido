@@ -4,9 +4,10 @@ use App\Http\Controllers\PairController;
 use App\Http\Controllers\RaceController;
 use App\Http\Controllers\RaceParticipantController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-//Auth::loginUsingId(1);
+Auth::loginUsingId(1);
 
 Route::get('/', function () {    
     return view('welcome');
@@ -32,6 +33,6 @@ Route::delete('/races/{id}', [RaceController::class, 'delete'])->name('races.del
 
 Route::get('/pairs', [PairController::class, 'index'])->name('pairs.index')->middleware('auth');
 Route::post('/pairs', [PairController::class, 'store'])->name('pairs.store')->middleware('auth');
-
+Route::delete('/pairs', [PairController::class, 'delete'])->name('pairs.delete')->middleware('auth');
 
 Route::get('/registrations', [RaceParticipantController::class, 'index'])->name('registrations.index')->middleware('auth');

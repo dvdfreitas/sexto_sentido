@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pair;
 use App\Models\Race;
 use App\Models\RaceParticipant;
 use Illuminate\Http\Request;
@@ -18,7 +19,9 @@ class RaceController extends Controller
     }
 
     public function show($id) {        
-        $race = Race::with('creator')->with('participants')->find($id);
+        $race = Race::with('creator')
+                            ->with('participants')                            
+                            ->find($id);                                            
         return view('races.show', compact('race'));
     }
 
@@ -43,6 +46,9 @@ class RaceController extends Controller
 
     public function delete($race_id) {
         $user_id = auth()->id();
+
+        $this->deletePair($race_id);
+
         $raceParticipant = RaceParticipant::where('user_id', $user_id)
                 ->where('race_id', $race_id)->first();
 
@@ -52,6 +58,33 @@ class RaceController extends Controller
         session()->flash('flash.banner', 'Inscrição cancelada com sucesso.');
         session()->flash('flash.bannerStyle', 'success');
 
+        
+
         return back();
     }
+
+    // Praticamente igual ao método em PairController
+    public function deletePair($race_id) {
+        $user = Auth::user();        
+        
+        $registration = RaceParticipant::where('user_id', $user->id)
+                    ->where('race_id', $race_id)
+                    ->first();                        
+
+        if ($registration) {
+            if ($user->runner == 'guide') {
+                $pair = Pair::where('guide_pair', $registration->id)
+                    ->first();
+            } else {
+                $pair = Pair::where('athlete_pair', $registration->id)
+                    ->first();
+            }
+
+            if ($pair) {
+                $pair->delete();
+            }
+        }
+
+    }
+
 }

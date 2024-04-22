@@ -7,6 +7,7 @@ use App\Models\RaceParticipant;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PairController extends Controller
 {
@@ -14,58 +15,100 @@ class PairController extends Controller
         $pairs = Pair::with('guideParticipant.user')
                 ->with('athleteParticipant.user')
                 ->with('guideParticipant.race')
-                ->get();
+                ->get();        
         return view('pairs.index', compact('pairs'));
     }
 
-    public function store() {
-        $data = request()->validate([
-            'pair_id' => 'required',            
-            'race_id' => 'required'
-        ]);
+    public function store() {                
+        
+        $this->deletePair();
 
-        $runner = User::find($data['pair_id']);
+        $pair_id = request()->pair_id;
+
+        $pair_user = User::find($pair_id);
         $user = auth()->user();
 
-        if ($runner->runner == $user->runner) {
+        if ($pair_user->runner == $user->runner) {
             // HLD
             throw new Exception('User tried to pair with a runner of the same type.');
         }
 
-        $isRegistered = RaceParticipant::where('user_id', $user->id)
+        // Check if user is registered in the race
+        $registeredRace = RaceParticipant::where('user_id', $user->id)
                 ->where('race_id', request()->race_id)
                 ->first();
         
-        // Check if is null
-        if (!$isRegistered) {
+        // If not registered
+        if (!$registeredRace) {
+            // Register the user
             $registeredRace = RaceParticipant::create([
                 'user_id' => $user->id,
                 'race_id' => request()->race_id
             ]);
-        } else {
-            $registeredRace = $isRegistered->id;
         }
         
-        $pairRegistered = RaceParticipant::where('user_id', $runner->id)
+        $pairRegisteredRace = RaceParticipant::where('user_id', $pair_user->id)
                 ->where('race_id', request()->race_id)
                 ->first();
 
-        if (!$pairRegistered) {
-            throw new Exception('Pair is not registered in the race.');
-        } else {
+        if (!$pairRegisteredRace) {
+            throw new Exception('Pair user is not registered in the race.');
+        } 
+        
+        
+        if ($user->runner == 'guide') {            
+            $pair = Pair::where('guide_pair', $registeredRace->id)
+                ->where('athlete_pair', $pairRegisteredRace->id)
+                ->first();            
+            if ($pair) {
+                throw new Exception('Pair already exists.');
+            }            
+            Pair::create([
+                'guide_pair' => $registeredRace->id,
+                'athlete_pair' => $pairRegisteredRace->id,            
+            ]);            
+        } else {            
+            $pair = Pair::where('guide_pair', $pairRegisteredRace->id)
+                ->where('athlete_pair', $registeredRace->id)
+                ->first();
+            if ($pair) {
+                throw new Exception('Pair already exists.');
+            }
+            Pair::create([
+                'guide_pair' => $pairRegisteredRace->id,
+                'athlete_pair' => $registeredRace->id,            
+            ]);                        
+        }                
+        return back();
+    }
+
+    public function delete() {
+        $this->deletePair();
+        
+        return back();
+    }
+
+    public function deletePair() {
+        $user = Auth::user();
+        $race_id = request()->race_id;
+
+        $registration = RaceParticipant::where('user_id', $user->id)
+                    ->where('race_id', $race_id)
+                    ->first();
+
+        if ($registration) {
             if ($user->runner == 'guide') {
-                Pair::create([
-                    'guide_pair' => $registeredRace,
-                    'athlete_pair' => $pairRegistered->id,            
-                ]);
+                $pair = Pair::where('guide_pair', $registration->id)
+                    ->first();
             } else {
-                Pair::create([
-                    'guide_pair' => $pairRegistered->id,
-                    'athlete_pair' => $registeredRace,            
-                ]);            
+                $pair = Pair::where('athlete_pair', $registration->id)
+                    ->first();
+            }
+
+            if ($pair) {
+                $pair->delete();
             }
         }
-            
-        return redirect(route('pairs.index'));
+
     }
 }

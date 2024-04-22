@@ -21,4 +21,10 @@ class Race extends Model
     public function isParticipant() {
         return $this->participants->contains(Auth::user()->id);
     }
+    
+    public function isPaired() {        
+        
+        $user = Auth::user();
+        return $user->userPaired($this);        
+    }
 }

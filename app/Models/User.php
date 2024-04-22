@@ -72,4 +72,32 @@ class User extends Authenticatable
     public function isGuide() {
         return $this->runner === 'guide';
     }
+
+    public function userPaired($race) {
+        
+        $user_paired = null;
+
+        // Return the user paired with the current user in the race
+        $registration = RaceParticipant::where('user_id', $this->id)
+            ->where('race_id', $race->id)
+            ->first();
+        
+        if (!$registration) return null;
+
+        if ($this->runner == 'guide') {
+            $user_paired = Pair::where('guide_pair', $registration->id)
+                ->first();            
+            if ($user_paired) $user_paired = $user_paired->athlete_pair;
+        } else { 
+            $user_paired = Pair::where('athlete_pair', $registration->id)
+                ->first();
+            if ($user_paired) $user_paired = $user_paired->guide_pair;
+        }
+                    
+        if ($user_paired)
+            $user_paired = RaceParticipant::find($user_paired)->user_id;
+
+        return $user_paired;
+
+    }
 }
