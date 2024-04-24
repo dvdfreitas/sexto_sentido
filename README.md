@@ -1,3 +1,10 @@
+# Refactor da BD
+
+User
+Race
+Registration (user_id, race_id)
+Pair (guide_id, athlete_id, race_id)
+
 # RaceParticipantFactory
 
 Ver se é possível fazer algo mais elegante. O factory deve fazer cache do participants.
@@ -8,6 +15,11 @@ A definition() e o método de criação parecem-me demasiado complexos.
 for ($i=0; $i<30; $i++)
     RaceParticipant::factory()->create();
 ```
+
+# Social Networks
+
+Passar as redes sociais da tabela users para uma tabela própria
+(id, user_id, network, link, ...)
 
 # RaceFactory
 

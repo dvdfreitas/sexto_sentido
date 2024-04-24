@@ -25,6 +25,7 @@ Route::middleware([
 
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('auth');
+Route::get('/users/{user:username}', [UserController::class, 'show'])->name('users.show')->middleware('auth');
 
 Route::get('/races', [RaceController::class, 'index'])->name('races.index');
 Route::get('/races/{id}', [RaceController::class, 'show'])->name('races.show');
