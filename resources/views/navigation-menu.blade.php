@@ -23,14 +23,7 @@
                     @auth
                         <x-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                             {{ __('Users') }}
-                        </x-nav-link>
-                        
-                        <x-nav-link href="{{ route('registrations.index') }}" :active="request()->routeIs('registrations.index')">
-                            {{ __('Registrations') }}
-                        </x-nav-link>
-                        <x-nav-link href="{{ route('pairs.index') }}" :active="request()->routeIs('pairs.index')">
-                            {{ __('Pairs') }}
-                        </x-nav-link>                        
+                        </x-nav-link>                                                
                     @endauth
                 </div>
             </div>
@@ -185,15 +178,7 @@
             @auth
                 <x-responsive-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                     {{ __('Users') }}
-                </x-responsive-nav-link>
-                
-                <x-responsive-nav-link href="{{ route('registrations.index', ['username' => Auth::user()->username ] ) }}" :active="request()->routeIs('registrations.index')">
-                    {{ __('Registrations') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link href="{{ route('pairs.index') }}" :active="request()->routeIs('pairs.index')">
-                    {{ __('Pairs') }}
-                </x-responsive-nav-link>
-                
+                </x-responsive-nav-link>                                                
             @endauth
         </div>
 

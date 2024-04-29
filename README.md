@@ -1,3 +1,17 @@
+# Próximos passos
+
+## Design
+
+- Nas histórias colocar o "Ler Mais" em baixo.
+- Colocar um Hero Page
+- Colocar um footer
+
+## Criação de informação
+
+- Melhorar o interface de criação do utilizador
+- Criar formulários para as corridas, histórias, etc.
+- Colocar no profile (social networks, etc)
+
 # Refactor da BD
 
 User
