@@ -1,3 +1,30 @@
+# Questões
+
+Quem se pode registar?  Hipóteses: 
+- Qualquer pessoa
+- Qualquer pessoa, mas depois será validado
+- Só pode ser inserido por alguém da Academia
+
+Quem pode inserir uma corrida?
+
+Como são feitos os emparelhamento (existe algum nome melhor)?
+- Os utilizadores podem escolher os pares (pode existir uma “black list”)?
+
+Que funcionalidades são úteis?
+Ver vinta
+Prova / treino
+
+
+Ana Dinís
+Bárbara 
+Ana Silva
+
+Edupa
+
+# Design
+
+https://drive.google.com/file/d/1nRmwDt4ETqaWstwnxafqLgH1SFL1h-11/view
+
 # Próximos passos
 
 ## Design
