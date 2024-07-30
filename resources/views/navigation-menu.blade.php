@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('welcome') }}">
-                        <x-application-mark class="block h-9 w-auto" />
+                        <x-application-mark class="block h-16 w-auto py-2" />
                     </a>
                 </div>
 
@@ -18,11 +18,11 @@
                     </x-nav-link>
                     @endauth
                     <x-nav-link href="{{ route('races.index') }}" :active="request()->routeIs('races.index')">
-                        {{ __('Races') }}
+                        {{ __('Corridas') }}
                     </x-nav-link>                        
                     @auth
                         <x-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
-                            {{ __('Users') }}
+                            {{ __('Utilizadores') }}
                         </x-nav-link>                                                
                     @endauth
                 </div>
@@ -137,7 +137,7 @@
                             href="{{ route('login') }}"
                             class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                         >
-                            Log in
+                            {{ __('Login') }}
                         </a>
 
                         @if (Route::has('register'))
@@ -145,7 +145,7 @@
                                 href="{{ route('register') }}"
                                 class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                             >
-                                Register
+                                {{ __('Register') }}
                             </a>
                         @endif
                     @endauth
@@ -173,11 +173,11 @@
                 </x-responsive-nav-link>
             @endauth
             <x-responsive-nav-link href="{{ route('races.index') }}" :active="request()->routeIs('races.index')">
-                {{ __('Races') }}
+                {{ __('Corridas') }}
             </x-responsive-nav-link>                
             @auth
                 <x-responsive-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
-                    {{ __('Users') }}
+                    {{ __('Utilizadores') }}
                 </x-responsive-nav-link>                                                
             @endauth
         </div>
