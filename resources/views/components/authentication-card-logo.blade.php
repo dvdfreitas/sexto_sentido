@@ -6,5 +6,5 @@
 </a>
 --}}
 <a href="/">
-    <img class="h-36 m-auto my-8" src="{{ asset('images/logo.png') }}" alt="logo" {{ $attributes }} />
+    <img class="h-36 m-auto my-8" src="{{ asset('storage/images/logo.png') }}" alt="logo" {{ $attributes }} />
 </a>

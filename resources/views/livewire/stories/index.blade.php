@@ -6,7 +6,7 @@
                     @if ($story->image)
                         <img class="h-56 w-full object-cover" src="{{ asset('storage/' . $story->image) }}" alt="{{ $story->title }}">
                     @else
-                        <img class="h-56 w-full" src="/images/logo.png" alt="{{ $story->title }}">
+                        <img class="h-56 w-full" src="{{ asset('storage/images/logo.png') }}" alt="{{ $story->title }}">
                     @endif
                     <div class="mt-2 font-extrabold font-mono text-xl ">{{ $story->title }}</div>            
                     <div class="text-sm">{{ date('d-m-Y', strtotime($story->date)) }}</div>
