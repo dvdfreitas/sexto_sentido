@@ -26,7 +26,15 @@
 
             <div class="mt-4">
                 <x-label for="runner" value="{{ __('Runner') }}" />
-                <x-input id="runner" class="block mt-1 w-full" type="text" name="runner" :value="old('runner')" required autocomplete="runner" />
+                <div class="flex mt-1 justify-around">
+                    <div class="flex space-x-2">
+                        <x-input id="runner" class="block" type="radio" name="runner" value="athlete" />
+                        <p>{{ __('Athlete') }}</p></div>
+                    <div class="flex space-x-2">
+                        <x-input id="runner" class="block" type="radio" name="runner" value="guide"/>
+                        <p>{{ __('Guide') }}</p>
+                    </div>
+                </div>
             </div>            
 
 

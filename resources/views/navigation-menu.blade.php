@@ -17,9 +17,9 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     @endauth
-                    <x-nav-link href="{{ route('races.index') }}" :active="request()->routeIs('races.index')">
+                    {{--<x-nav-link href="{{ route('races.index') }}" :active="request()->routeIs('races.index')">
                         {{ __('Corridas') }}
-                    </x-nav-link>                        
+                    </x-nav-link>--}}
                     @auth
                         <x-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                             {{ __('Utilizadores') }}
@@ -172,12 +172,12 @@
                     {{ __('Dashboard') }}
                 </x-responsive-nav-link>
             @endauth
-            <x-responsive-nav-link href="{{ route('races.index') }}" :active="request()->routeIs('races.index')">
-                {{ __('Corridas') }}
-            </x-responsive-nav-link>                
+            {{--<x-responsive-nav-link href="{{ route('races.index') }}" :active="request()->routeIs('races.index')">
+                {{ __('Races') }}
+            </x-responsive-nav-link>--}}
             @auth
                 <x-responsive-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
-                    {{ __('Utilizadores') }}
+                    {{ __('Users') }}
                 </x-responsive-nav-link>                                                
             @endauth
         </div>

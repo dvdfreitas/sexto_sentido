@@ -543,6 +543,7 @@
     "This user already belongs to the team.": "Este utilizador já pertence à equipa.",
     "This user has already been invited to the team.": "This user has already been invited to the team.",
     "Timor-Leste": "Timor-Leste",
+    "Title": "Título",
     "to": "até",
     "Today": "Today",
     "Toggle navigation": "Alternar navegação",
@@ -614,5 +615,11 @@
     "You may not leave a team that you created.": "Não pode abandonar a equipa que criou.",
     "Your email address is not verified.": "Seu endereço de e-mail não está verificado.",
     "Zambia": "Zambia",
-    "Zimbabwe": "Zimbabwe"
+    "Zimbabwe": "Zimbabwe",
+    "Subtitle": "Subtítulo",
+    "Description": "Descrição",
+    "Athlete": "Atleta",
+    "Guide": "Guia",
+    "Runner": "Corredor",
+    "Registrations": "Registos"
 }

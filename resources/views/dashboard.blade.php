@@ -9,13 +9,25 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 
-                <a href="{{ route('pairs.index') }}">
-                    <x-button>pairs</x-button>                    
-                </a>
+                <div class="grid grid-cols-2 lg:grid-cols-3 gap-3">
+                    <a href="/stories/create">
+                        <div class="grid place-items-center text-center bg-orange-600 h-48 text-white text-2xl rounded">Criar histórias</div>
+                    </a>
 
-                <a href="{{ route('registrations.index') }}">
-                    <x-button>Registrations</x-button>                    
-                </a>
+                    {{--<a href="{{ route('pairs.index') }}">--}}
+                        <div class="grid">
+                            <div class="grid rounded-t place-items-center text-center bg-orange-400 h-24 text-white text-2xl">Pares</div>
+                            <div class="grid rounded-b place-items-center text-center bg-orange-600 h-24 text-white text-2xl">Temporariamente indisponível</div>
+                        </div>
+                    {{--</a>--}}
+
+                    {{--<a href="{{ route('registrations.index') }}">--}}
+                    <div class="grid">                        
+                        <div class="grid rounded-t place-items-center text-center bg-orange-600 h-24 text-white text-2xl">{{ __('Registrations') }}</div>
+                        <div class="grid rounded-b place-items-center text-center bg-orange-400 h-24 text-white text-2xl">Temporariamente indisponível</div>
+                    </div>
+                    {{--</a>--}}
+                </div>
                 
 
 

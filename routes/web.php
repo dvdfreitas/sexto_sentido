@@ -3,11 +3,12 @@
 use App\Http\Controllers\PairController;
 use App\Http\Controllers\RaceController;
 use App\Http\Controllers\RaceParticipantController;
+use App\Http\Controllers\StoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Auth::loginUsingId(1);
+//Auth::loginUsingId(1);
 
 Route::get('/', function () {    
     return view('welcome');
@@ -26,6 +27,8 @@ Route::middleware([
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('auth');
 Route::get('/users/{user:username}', [UserController::class, 'show'])->name('users.show')->middleware('auth');
+
+Route::get('/stories/create', [StoryController::class, 'create'])->name('stories.create')->middleware('auth');
 
 Route::get('/races', [RaceController::class, 'index'])->name('races.index');
 Route::get('/races/{id}', [RaceController::class, 'show'])->name('races.show');
